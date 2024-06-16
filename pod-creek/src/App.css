@@ -39,13 +39,24 @@ body {
 /* styling the NavBar */
 .navbar {
   background-color: #1F291C ;
-  /* position: fixed; */
-  /* top: 0; */
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding: 0.5rem 1rem;
+  padding: 3.5rem 30rem;
+}
+
+.navbar a {
+  text-decoration: none; /* Remove underline from links */
+  color: #000000; /* Set link color */
+  font-weight: bold;
+  margin-right: 1.5rem ;
+  background-color: #B8BFB4;
+  border-radius: 0.375rem;
+  padding-block: 5px;
+  padding-inline: 5px;
+  
+
 }
 
 .navbar-links {
