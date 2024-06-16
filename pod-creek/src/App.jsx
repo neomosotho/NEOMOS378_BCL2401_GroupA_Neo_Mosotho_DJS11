@@ -19,7 +19,7 @@ function App() {
           <img src={logo} className="logo" alt="logo" />
         </header>
         <main>
-          
+
           <Routes>
           <Route exact path="/" element={All} />
             <Route path="/audio" element={Audio} />
@@ -28,7 +28,6 @@ function App() {
 
         </main>
       </div>
-      <h1>Pod Creek</h1>
       
     </Router>
   )

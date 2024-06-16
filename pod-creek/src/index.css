@@ -1,4 +1,28 @@
-:root {
+/* Fonts */
+body {
+  font-family: sans-serif;
+  font-size: 16px;
+}
+
+/* Colors */
+body {
+  background-color: #161B15;
+  color: #B5BCB1;
+}
+
+/* Spacing */
+.container {
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+
+
+
+
+
+
+/* :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
@@ -65,4 +89,4 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
-}
+} */
