@@ -43,7 +43,7 @@ body {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding: 3.5rem 30rem;
+  padding: 3.5rem 65rem;
 }
 
 .navbar a {
@@ -63,6 +63,18 @@ body {
   color: white;
   text-decoration: none;
   font-size: 16px;
+}
+
+.podList {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 20px;
+  background-color: #B5BCB1;
+  border-radius: 10px;
+  margin: 20px;
+  
+
 }
 
 
