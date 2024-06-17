@@ -8,16 +8,21 @@ import All from './components/All';
 import Audio from './components/Audio';
 import Videos from './components/Videos';
 import './App.css'
-import styled from "styled-components";
+import styled, { ThemeProvider } from "styled-components";
 import { lightTheme, darkTheme } from "./utils/Themes";
 
 
-const Container = styled.div``;
+const Container = styled.div`
+background: ${({ theme }) => theme.bg};
+width: 100%;
+height: 100vh;
+`;
 
 function App() {
 // hooks
 const{darkMode, setDarkMode} = useState(true);
   return (
+    <ThemeProvider theme = {darkMode ? darkTheme : lightTheme}>
     <Router>
       
       <div className = "App">
@@ -45,6 +50,7 @@ const{darkMode, setDarkMode} = useState(true);
       </div>
       
     </Router>
+    </ThemeProvider>
   )
 }
 
