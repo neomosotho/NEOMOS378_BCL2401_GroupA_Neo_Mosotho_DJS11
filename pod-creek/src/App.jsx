@@ -1,7 +1,6 @@
 /* eslint-disable no-unused-vars */
-// import { useState } from 'react'
 import React, {useState, useEffect} from 'react';
-import logo from './assets/images/logo.png';
+// import logo from './assets/images/logo.png';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import NavBar from "./components/NavBar";
 import All from './components/All';
@@ -10,25 +9,31 @@ import Videos from './components/Videos';
 import './App.css'
 import styled, { ThemeProvider } from "styled-components";
 import { lightTheme, darkTheme } from "./utils/Themes";
+import SideBar from './components/SideBar';
 
 
 const Container = styled.div`
+display: flex;
 background: ${({ theme }) => theme.bg};
 width: 100%;
 height: 100vh;
+overflow-x: hidden;
+overfllow-y: hidden;
 `;
 
 function App() {
 // hooks
 const{darkMode, setDarkMode} = useState(true);
+
   return (
     <ThemeProvider theme = {darkMode ? darkTheme : lightTheme}>
+      <Container>
     <Router>
-      
+    <SideBar />
+    <NavBar />
       <div className = "App">
-        <NavBar />
         <header className="App-header">
-          <img src={logo} className="logo" alt="logo" />
+          {/* <img src={logo} className="logo" alt="logo" /> */}
         </header>
         <main>
 
@@ -41,18 +46,19 @@ const{darkMode, setDarkMode} = useState(true);
         </main>
       </div>
 
-      <div className = "Podcasts">
+      {/* <div className = "Podcasts">
         <h2>podcast 1</h2>
         <h2>podcast 1</h2>
         <h2>podcast 1</h2>
         <h2>podcast 1</h2>
         <h2>podcast 1</h2>
-      </div>
+      </div> */}
       
     </Router>
+    </Container>
     </ThemeProvider>
   )
 }
 
 
-export default App
+export default App;

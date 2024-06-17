@@ -15,16 +15,15 @@ body {
 .App {
   display: flex;
   flex-direction: column;
-  /* align-items: center; */
   min-height: 100vh;
 }
 
 .App-header {
   display: flex;
-  align-items: center;  /* Align logo and heading vertically */
-  padding: 1rem;  /* Add some padding */
-  background-color: #1F291C;  /* Set a background color */
-  color: #B5BCB1;  /* Set text color to white */
+  align-items: center;  
+  padding: 1rem; 
+  background-color: #1F291C;  
+  color: #B5BCB1;  
 }
 
 .App-header img{
@@ -36,7 +35,7 @@ body {
   top: 20px;
 }
 
-/* styling the NavBar */
+
 .navbar {
   background-color: #1F291C ;
   display: flex;
@@ -47,8 +46,8 @@ body {
 }
 
 .navbar a {
-  text-decoration: none; /* Remove underline from links */
-  color: #000000; /* Set link color */
+  text-decoration: none; 
+  color: #000000; 
   font-weight: bold;
   margin-right: 1.5rem ;
   background-color: #B8BFB4;
