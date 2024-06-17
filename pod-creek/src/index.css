@@ -1,14 +1,14 @@
 /* Fonts */
-body {
+/* body {
   font-family: sans-serif;
   font-size: 16px;
-}
+} */
 
 /* Colors */
-body {
+/* body {
   background-color: #161B15;
   color: #B5BCB1;
-}
+} */
 
 /* Spacing */
 .container {
@@ -21,7 +21,7 @@ body {
 
 
 
-
+ 
 /* :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;

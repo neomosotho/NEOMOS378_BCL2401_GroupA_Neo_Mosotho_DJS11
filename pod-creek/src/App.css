@@ -5,38 +5,38 @@
   text-align: center;
 } */
 
-body {
+/* body {
   background: #161B15;
   margin: 0;
   padding: 0;
   font-family:Arial, sans-serif;
-}
+} */
 
-.App {
+/* .App {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-}
+} */
 
-.App-header {
+/* .App-header {
   display: flex;
   align-items: center;  
   padding: 1rem; 
   background-color: #1F291C;  
   color: #B5BCB1;  
-}
+} */
 
-.App-header img{
-  height: 200px;
+/* .App-header img{
+  height: 50px;
   position: absolute;
   display:flex;
   flex-direction: row;
   left: 20px;
   top: 20px;
-}
+} */
 
 
-.navbar {
+/* .navbar {
   background-color: #1F291C ;
   display: flex;
   flex-direction: row;
@@ -74,7 +74,7 @@ body {
   margin: 20px;
   
 
-}
+} */
 
 
 
