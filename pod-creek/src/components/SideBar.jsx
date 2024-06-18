@@ -133,16 +133,16 @@ const buttonItems =  [
 const SideBar = ({setMenuOpen, setDarkMode, darkMode}) => {
     return (
         <MenuContainer className="side-bar">
-            <flex>
-            <logo>
+            <Flex>
+            <Logo>
                 <img src = {logo} alt="logo"/>
-            </logo>
+            </Logo>
             
             <Close>
                 <FontAwesomeIcon icon = {faTimes}/>
             </Close>
 
-            </flex>
+            </Flex>
 
             {menuItems.map((item, index) => (
                 <Link to={item.link} key={index} style = {{ textDecoration: "none"}}>
@@ -152,7 +152,7 @@ const SideBar = ({setMenuOpen, setDarkMode, darkMode}) => {
                   </Elements>
                 </Link>
             ))}
-
+            <HR/>
             {buttonItems.map((item, index) => (
         <div key={index} onClick={item.fun}>
           <Elements>
@@ -161,7 +161,7 @@ const SideBar = ({setMenuOpen, setDarkMode, darkMode}) => {
           </Elements>
         </div>
       ))}
-      <HR/>
+      
     </MenuContainer>
   );
 };

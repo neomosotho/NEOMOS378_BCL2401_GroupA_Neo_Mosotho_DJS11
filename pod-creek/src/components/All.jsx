@@ -1,24 +1,23 @@
 /* eslint-disable no-unused-vars */
-import React from 'react';
+import React from "react";
 import useFetchPodcasts from "../utils/useFetchPodcasts";
 
 const All = () => {
-  const { data: podcasts, loading, error } = useFetchPodcasts("https://podcast-api.netlify.app");
+  const { data, loading, error } = useFetchPodcasts("all");
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error: {error.message}</p>;
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error.message}</div>;
 
   return (
     <div>
-      <h2>All Podcasts</h2>
-      <ul>
-        {podcasts.map((podcast) => (
-          <li key={podcast.id}>
-            <h3>{podcast.title}</h3>
-            <p>{podcast.description}</p>
-          </li>
-        ))}
-      </ul>
+      {data.map((podcast) => (
+        <div key={podcast.id}>
+          <img src={podcast.image} alt={podcast.title} style={{ width: "100px", height: "100px" }} />
+          <h3>{podcast.title}</h3>
+          <p>{podcast.description}</p>
+          
+        </div>
+      ))}
     </div>
   );
 };

@@ -1,33 +1,45 @@
+/* eslint-disable no-unused-vars */
 import { useState, useEffect } from "react";
+import { fetchAllPodcasts, fetchGenre, fetchShow } from "./Api";
 
-const useFetchPodcasts = (url) => {
-    const [data, setData] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
 
-    useEffect(() => {
-        const fetchData = async () => {
-          try {
-            const response = await fetch(url);
-            if (!response.ok) {
-              throw new Error("Network response was not ok");
-            }
-            const result = await response.json();
-            setData(result);
-            setLoading(false);
-          } catch (error) {
-            setError(error);
-            setLoading(false);
-          }
-        };
-    
-        fetchData();
-      }, [url]);
-    
-      return { data, loading, error };
+const useFetchPodcasts = (type, id = null) => {
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        let result;
+        switch (type) {
+          case "all":
+            result = await fetchAllPodcasts();
+            break;
+          case "genre":
+            result = await fetchGenre(id);
+            break;
+          case "show":
+            result = await fetchShow(id);
+            break;
+          default:
+            throw new Error("Invalid type");
+        }
+        setData(result);
+      } catch (err) {
+        setError(err);
+      } finally {
+        setLoading(false);
+      }
     };
-    
-    export default useFetchPodcasts;
+
+    fetchData();
+  }, [type, id]);
+
+  return { data, loading, error };
+};
+
+export default useFetchPodcasts;
     
     
 

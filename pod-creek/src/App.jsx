@@ -1,16 +1,11 @@
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from "react";
-// import logo from './assets/images/logo.png';
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  BrowserRouter,
-} from "react-router-dom";
-import NavBar from "./components/NavBar";
+import {BrowserRouter, Routes, Route} from "react-router-dom";
+// import NavBar from "./components/NavBar";
 import All from "./components/All";
-import Audio from "./components/Genre";
-import Videos from "./components/Shows";
+import Genre from "./components/Genre";
+import Shows from "./components/Shows";
+// import useFetchPodcasts from "./utils/useFetchPodcasts";
 import "./App.css";
 import styled, { ThemeProvider } from "styled-components";
 import { lightTheme, darkTheme } from "./utils/Themes";
@@ -29,9 +24,8 @@ const Frame = styled.div`
 display: flex;
 flex-direction: column;
 flex: 3;
-
-
 `;
+
 function App() {
   // hooks
   const [ darkMode, setDarkMode ] = useState(false);
@@ -41,25 +35,24 @@ function App() {
   return (
     <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
       <BrowserRouter>
-      {/* <Router> */}
         <Container>
           <SideBar setMenuOpen = {setMenuOpen} setDarkMode = {setDarkMode} darkMode = {darkMode} />
 
-          <Frame>PodCreek</Frame>
-          {/* <NavBar />
+          <Frame>
+           {/* <NavBar /> */}
           
 
           <div className="App">
             <main>
               <Routes>
-                <Route exact path="/" element={All} />
-                <Route path="/audio" element={Audio} />
-                <Route path="/videos" element={Videos} />
+                <Route exact path="/" element={<All/>} />
+                <Route path="/genre/:id" element={<Genre/>} />
+                <Route path="/shows/:id" element={<Shows/>} />
               </Routes>
             </main>
-          </div> */}
+          </div> 
+          </Frame>
         </Container>
-      {/* </Router> */}
       </BrowserRouter>
     </ThemeProvider>
   );
