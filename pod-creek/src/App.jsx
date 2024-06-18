@@ -34,7 +34,7 @@ flex: 3;
 `;
 function App() {
   // hooks
-  const [ darkMode, setDarkMode ] = useState(true);
+  const [ darkMode, setDarkMode ] = useState(false);
 
   const [ menuOpen, setMenuOpen ] = useState(true);
 
