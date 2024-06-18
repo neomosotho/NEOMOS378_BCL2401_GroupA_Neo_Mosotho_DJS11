@@ -18,24 +18,35 @@ import SideBar from "./components/SideBar";
 
 const Container = styled.div`
   display: flex;
-  background-color: #0f1345;
+  background: ${({ theme }) => theme.bgLight};
   width: 100%;
   height: 100vh;
   overflow-x: hidden;
   overfllow-y: hidden;
 `;
 
+const Frame = styled.div`
+display: flex;
+flex-direction: column;
+flex: 3;
+
+
+`;
 function App() {
   // hooks
   const [ darkMode, setDarkMode ] = useState(true);
 
+  const [ menuOpen, setMenuOpen ] = useState(true);
+
   return (
     <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
       <BrowserRouter>
-      <Router>
+      {/* <Router> */}
         <Container>
-          <SideBar />
-          <NavBar />
+          <SideBar setMenuOpen = {setMenuOpen} setDarkMode = {setDarkMode} darkMode = {darkMode} />
+
+          <Frame>PodCreek</Frame>
+          {/* <NavBar />
           
 
           <div className="App">
@@ -46,9 +57,9 @@ function App() {
                 <Route path="/videos" element={Videos} />
               </Routes>
             </main>
-          </div>
+          </div> */}
         </Container>
-      </Router>
+      {/* </Router> */}
       </BrowserRouter>
     </ThemeProvider>
   );

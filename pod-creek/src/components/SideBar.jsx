@@ -130,7 +130,7 @@ const buttonItems =  [
 
 
 
-const SideBar = () => {
+const SideBar = ({setMenuOpen, setDarkMode, darkMode}) => {
     return (
         <MenuContainer className="side-bar">
             <flex>
