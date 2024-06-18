@@ -9,8 +9,8 @@ import {
 } from "react-router-dom";
 import NavBar from "./components/NavBar";
 import All from "./components/All";
-import Audio from "./components/Audio";
-import Videos from "./components/Videos";
+import Audio from "./components/Genre";
+import Videos from "./components/Shows";
 import "./App.css";
 import styled, { ThemeProvider } from "styled-components";
 import { lightTheme, darkTheme } from "./utils/Themes";
