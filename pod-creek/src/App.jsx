@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 import {BrowserRouter, Routes, Route} from "react-router-dom";
 import NavBar from "./components/NavBar";
-import All from "./components/All";
+import Dashboard from "./pages/Dashboard";
 import Genre from "./components/Genre";
 import Shows from "./components/Shows";
 // import useFetchPodcasts from "./utils/useFetchPodcasts";
@@ -52,7 +52,7 @@ function App() {
           <div className="App">
             <main>
               <Routes>
-                <Route exact path="/" element={<All/>} />
+                <Route exact path="/" element={<Dashboard/>} />
                 <Route path="/genre/:id" element={<Genre/>} />
                 <Route path="/shows/:id" element={<Shows/>} />
               </Routes>

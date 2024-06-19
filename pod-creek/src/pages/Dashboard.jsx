@@ -2,7 +2,7 @@
 import React from "react";
 import useFetchPodcasts from "../utils/useFetchPodcasts";
 
-const All = () => {
+const Dashboard = () => {
   const { data, loading, error } = useFetchPodcasts("all");
 
   if (loading) return <div>Loading...</div>;
@@ -22,4 +22,4 @@ const All = () => {
   );
 };
 
-export default All;
+export default Dashboard;
