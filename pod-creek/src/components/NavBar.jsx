@@ -1,18 +1,11 @@
-/* eslint-disable no-unused-vars */
-// import React from 'react';
-// import { Link } from 'react-router-dom';
-// // import './NavBar.css';
+import React from "react";
+import styled from "styled-components";
 
-// const NavBar = () => {
-//   return (
-//     <nav className="navbar">
-//       <div>
-//         <Link to="/">All</Link>
-//         <Link to="/audio">Audio</Link>
-//         <Link to="/videos">Videos</Link>
-//       </div>
-//     </nav>
-//   );
-// };
+const NavBarDiv = styled.div`
+`;
 
-// export default NavBar;
+const NavBar = () => {
+return <NavBarDiv>NavBar</NavBarDiv>;
+};
+
+export default NavBar;

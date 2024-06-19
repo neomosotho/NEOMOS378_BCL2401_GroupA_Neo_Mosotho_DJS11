@@ -1,10 +1,12 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
 import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import logo from "../assets/images/logo.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHome, faTimes, faSearch, faStar, faUpload, faSun, faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
+import { faHome, faTimes, faSearch, faStar, faUpload, faSun, faSignOutAlt, faMoon } from "@fortawesome/free-solid-svg-icons";
 
 const MenuContainer = styled.div`
 flex: 0.5;
@@ -13,26 +15,26 @@ flex-direction: column;
 height: 100vh;
 background-color: ${({ theme }) => theme.bg};
 color: ${({ theme }) => theme.text_primary};
-// @media (max-width: 1100px) {
-// position: fixed;
-// z-index: 1000;
-// width: 100%;
-// max-width: 250px;
-// left: ${({ setMenuOpen }) => (setMenuOpen ? "0" : "-100%" )};
-// transition: 0.3s ease-in-out;
-// }
+@media (max-width: 1100px) {
+position: fixed;
+z-index: 1000;
+width: 100%;
+max-width: 250px;
+left: ${({ menuOpen }) => (menuOpen ? "0" : "-100%" )};
+transition: 0.3s ease-in-out;
+}
 `;
 
 const Flex = styled.div`
 display: flex;
 flex-direction: row;
 align-items: center;
-justify-content: center;
+justify-content: space-between;
+padding: 0px 12px;
 
 `;
 
 const Logo = styled.div`
-width: 100%;
 color: ${({ theme }) => theme.primary};
 display: flex;
 align-items: center;
@@ -85,60 +87,58 @@ margin: 10px 0px;
 
 `;
 
-const menuItems = [
-    {
-        Link : "/",
-        name : "Dashboard",
-        icon : faHome,
-    },
+const SideBar = ({menuOpen, setMenuOpen, setDarkMode, darkMode}) => {
 
-    {
-        Link : "/search",
-        name : "Search",
-        icon :  faSearch,
-    },
+    const menuItems = [
+        {
+            Link : "/",
+            name : "Dashboard",
+            icon : faHome,
+        },
+    
+        {
+            Link : "/search",
+            name : "Search",
+            icon :  faSearch,
+        },
+    
+        {
+            Link : "/favourites",
+            name : "Favourites",
+            icon : faStar,
+        }
+    
+    ];
+    
+    const buttonItems =  [
+       {
+            fun : () => console.log("Upload"),
+            name : "Upload",
+            icon : faUpload,
+        },
+    
+        {
+            fun : () => setDarkMode(!darkMode),
+            name : darkMode ? "Light Mode" : "Dark Mode",
+            icon : darkMode ? faSun : faMoon,
+        },
+    
+        {
+            fun : () => console.log("Sign Out"),
+            name : "Sign Out",
+            icon : faSignOutAlt,
+        }
+    
+    ];
 
-    {
-        Link : "/favourites",
-        name : "Favourites",
-        icon : faStar,
-    }
-
-];
-
-const buttonItems =  [
-   {
-        fun : () => console.log("Upload"),
-        name : "Upload",
-        icon : faUpload,
-    },
-
-    {
-        fun : () => console.log("Light Mode"),
-        name : "Light Mode",
-        icon : faSun,
-    },
-
-    {
-        fun : () => console.log("Sign Out"),
-        name : "Sign Out",
-        icon : faSignOutAlt,
-    }
-
-];
-
-
-
-
-const SideBar = ({setMenuOpen, setDarkMode, darkMode}) => {
     return (
-        <MenuContainer className="side-bar">
+        <MenuContainer menuOpen = {menuOpen}>
             <Flex>
             <Logo>
                 <img src = {logo} alt="logo"/>
             </Logo>
             
-            <Close>
+            <Close onClick = {() => setMenuOpen(false)}>
                 <FontAwesomeIcon icon = {faTimes}/>
             </Close>
 
