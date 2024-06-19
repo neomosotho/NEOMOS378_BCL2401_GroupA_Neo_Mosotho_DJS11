@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from "react";
 import {BrowserRouter, Routes, Route} from "react-router-dom";
-// import NavBar from "./components/NavBar";
+import NavBar from "./components/NavBar";
 import All from "./components/All";
 import Genre from "./components/Genre";
 import Shows from "./components/Shows";
@@ -28,7 +28,7 @@ flex: 3;
 
 function App() {
   // hooks
-  const [ darkMode, setDarkMode ] = useState(false);
+  const [ darkMode, setDarkMode ] = useState(true);
 
   const [ menuOpen, setMenuOpen ] = useState(true);
 
@@ -44,7 +44,7 @@ function App() {
           />
 
           <Frame>
-           {/* <NavBar /> */}
+          <NavBar />
           
 
           <div className="App">
