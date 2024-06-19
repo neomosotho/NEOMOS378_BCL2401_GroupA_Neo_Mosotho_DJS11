@@ -36,15 +36,17 @@ function App() {
     <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
       <BrowserRouter>
         <Container>
+          {menuOpen &&
           <SideBar 
           menuOpen = {menuOpen}
           setMenuOpen = {setMenuOpen}
           setDarkMode = {setDarkMode} 
           darkMode = {darkMode} 
           />
+        }
 
           <Frame>
-          <NavBar />
+          <NavBar menuOpen = {menuOpen} setMenuOpen = {setMenuOpen} />
           
 
           <div className="App">
