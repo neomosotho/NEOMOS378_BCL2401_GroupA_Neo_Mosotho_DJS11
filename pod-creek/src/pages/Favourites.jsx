@@ -1,12 +1,10 @@
 /* eslint-disable no-unused-vars */
 import React from "react";
 
-const Search = () => {
+const Favourites = () => {
     return (
-        <div>Search</div>
+        <div>Favourites</div>
     )
-
-
 }
 
-export default Search;
+export default Favourites;

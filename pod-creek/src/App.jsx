@@ -5,6 +5,8 @@ import NavBar from "./components/NavBar";
 import Dashboard from "./pages/Dashboard";
 import Genre from "./components/Genre";
 import Shows from "./components/Shows";
+import Search from "./pages/Search";
+import Favourites from "./pages/Favourites";
 // import useFetchPodcasts from "./utils/useFetchPodcasts";
 import "./App.css";
 import styled, { ThemeProvider } from "styled-components";
@@ -54,6 +56,9 @@ function App() {
               <Routes>
                 <Route exact path="/" element={<Dashboard/>} />
                 <Route path="/genre/:id" element={<Genre/>} />
+                <Route path="/shows/:id" element={<Shows/>} />
+                <Route path="/search" element={<Search/>} />
+                <Route path="/favourites" element={<Favourites/>} />
                 <Route path="/shows/:id" element={<Shows/>} />
               </Routes>
             </main>
