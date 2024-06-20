@@ -97,7 +97,7 @@ const Shows = () => {
                 season.episodes.map((episode) => (
                   <EpisodeContainer key={episode.id}>
                     <p>{episode.title}</p>
-                    <PlayButton onClick={() => handleEpisodeClick(episode)}>
+                    <PlayButton onClick={() => handleEpisodeClick(episode.file)}>
                       Play
                     </PlayButton>
                   </EpisodeContainer>

@@ -82,7 +82,7 @@ const Dashboard = () => {
         {selectedShow.seasons.map((season) => (
           
           <SeasonContainer key={season.number} onClick={() => handleSeasonClick(season)}>
-            <h3>Season {season.number}</h3>
+            <h3>Season {season.season}</h3>
             {selectedSeason === season &&
               season.episodes.map((episode) => (
 
