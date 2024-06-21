@@ -4,7 +4,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import logo from "../assets/images/logo.png";
+import logo from "../assets/images/logo.image.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHome, faTimes, faSearch, faStar, faUpload, faSun, faSignOutAlt, faMoon } from "@fortawesome/free-solid-svg-icons";
 
@@ -36,17 +36,16 @@ padding: 0px 12px;
 
 const Logo = styled.div`
 color: ${({ theme }) => theme.primary};
-display: flex;
-align-items: center;
-justify-content: center;
-font-size: 25px;
-gap: 6px;
-font-weight: bold;
-font-size: 20px;
-margin: 16px 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-weight: bold;
+  font-size: 20px;
+  margin: 16px 0px;
 `;
 
-const img = styled.img`
+const Image = styled.img`
   height: 40px;
 `;
 
@@ -103,7 +102,7 @@ const SideBar = ({menuOpen, setMenuOpen, setDarkMode, darkMode}) => {
         },
     
         {
-            Link : "/favourites",
+            Link : "/favorites",
             name : "Favourites",
             icon : faStar,
         }
@@ -135,7 +134,7 @@ const SideBar = ({menuOpen, setMenuOpen, setDarkMode, darkMode}) => {
         <MenuContainer menuOpen = {menuOpen}>
             <Flex>
             <Logo>
-                <img src = {logo} alt="logo"/>
+                <img src = {logo} alt="logo"/>PODCREEK
             </Logo>
             
             <Close onClick = {() => setMenuOpen(false)}>
@@ -145,7 +144,7 @@ const SideBar = ({menuOpen, setMenuOpen, setDarkMode, darkMode}) => {
             </Flex>
 
             {menuItems.map((item, index) => (
-                <Link to={item.link} key={index} style = {{ textDecoration: "none"}}>
+                <Link to={item.Link} key={index} style = {{ textDecoration: "none"}}>
                   <Elements>
                     <FontAwesomeIcon icon={item.icon} />
                     <NavText>{item.name}</NavText>

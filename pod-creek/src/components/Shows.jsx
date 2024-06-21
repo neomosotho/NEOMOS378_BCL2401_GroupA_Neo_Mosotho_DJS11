@@ -1,11 +1,13 @@
 /* eslint-disable no-unused-vars */
 // src/components/Shows.jsx
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import useFetchPodcasts from "../utils/useFetchPodcasts";
 import styled from "styled-components";
 import AudioPlayer from "./AudioPlayer";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faStar as solidStar, faStar as regularStar } from "@fortawesome/free-solid-svg-icons";
 
 const ShowContainer = styled.div`
   padding: 20px;
@@ -56,12 +58,47 @@ const PlayButton = styled.button`
   }
 `;
 
+const FavoritesButton = styled.button`
+  background: ${({ theme }) => theme.button};
+  color: ${({ theme }) => theme.text_primary};
+  border: none;
+  border-radius: 4px;
+  padding: 5px 10px;
+  cursor: pointer;
+  margin-left: 10px;
+  font-size: 14px;
+
+  &:hover {
+    background: ${({ theme }) => theme.bgLight};
+  }
+`;
+
 const Shows = () => {
   const { id } = useParams();
   const { data, loading, error } = useFetchPodcasts("show", id);
   const [showSeasons, setShowSeasons] = useState(false);
   const [selectedSeason, setSelectedSeason] = useState(null);
   const [selectedEpisode, setSelectedEpisode] = useState(null);
+  const [favorites, setFavorites] = useState([]);
+
+  useEffect(() => {
+    const favs = JSON.parse(localStorage.getItem("favorites")) || [];
+    setFavorites(favs);
+  }, []);
+
+  const handleFavoriteClick = (episode, show, season) => {
+    const newFavorite = {
+        episode,
+        show,
+        season,
+        addedAt: new Date().toISOString()
+    };
+
+    const storedFavorites = localStorage.getItem('favorites');
+    const favorites = storedFavorites ? JSON.parse(storedFavorites) : [];
+    favorites.push(newFavorite);
+    localStorage.setItem('favorites', JSON.stringify(favorites));
+  };
 
   const handleSeasonClick = (season) => {
     setSelectedSeason(season);
@@ -83,6 +120,7 @@ const Shows = () => {
     <ShowContainer>
       <h2>{data.title}</h2>
       <p>{data.description}</p>
+      
       <SeasonButton onClick={toggleSeasonsDropdown}>
         {showSeasons ? "Hide Seasons" : "Show Seasons"}
       </SeasonButton>
@@ -97,9 +135,12 @@ const Shows = () => {
                 season.episodes.map((episode) => (
                   <EpisodeContainer key={episode.id}>
                     <p>{episode.title}</p>
-                    <PlayButton onClick={() => handleEpisodeClick(episode.file)}>
+                    <PlayButton onClick={() => handleEpisodeClick(episode)}>
                       Play
                     </PlayButton>
+                    <FavoritesButton onClick={() => handleFavoriteClick(episode)}>
+                      <FontAwesomeIcon icon={favorites.some(fav => fav.id === episode.id) ? solidStar : regularStar} />
+                    </FavoritesButton>
                   </EpisodeContainer>
                 ))}
             </SeasonContainer>
@@ -114,6 +155,7 @@ const Shows = () => {
 };
 
 export default Shows;
+
 
 
 
