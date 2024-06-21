@@ -16,11 +16,11 @@ export const darkTheme = {
 export const lightTheme = {
     bg: "linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(245, 245, 245, 0.9) 100%)",
     bgLight: "rgba(245, 245, 245, 0.9)",
-    primary: "rgba(0, 0, 0, 0.8)", // Dark black
+    primary: "rgba(1, 1, 1, 0.8)", // Dark black
     text_primary: "rgba(34, 34, 34, 0.9)", // Dark grey
     text_secondary: "rgba(120, 120, 120, 0.7)", // Grey
     card: "rgba(255, 255, 255, 0.8)", // Light grey
-    button: "rgba(34, 34, 34, 0.8)", // Dark grey
+    button: "rgba(255, 215, 0, 0.8)", // Dark grey
     favorite: "rgba(255, 215, 0, 0.8)" // Gold color for favorites
 };
 
