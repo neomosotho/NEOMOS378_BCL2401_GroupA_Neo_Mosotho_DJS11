@@ -70,8 +70,9 @@ const Favorites = () => {
   };
 
   return (
+    
     <FavoritesContainer>
-      <h2>Favorites</h2>
+      
       {favorites.length === 0 ? (
         <p>No favorite episodes found.</p>
       ) : (

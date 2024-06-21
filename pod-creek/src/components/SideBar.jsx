@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import logo from "../assets/images/logo.image.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHome, faTimes, faSearch, faStar, faUpload, faSun, faSignOutAlt, faMoon } from "@fortawesome/free-solid-svg-icons";
+import { faHome, faTimes, faSearch, faStar, faMusic, faSun, faSignOutAlt, faMoon } from "@fortawesome/free-solid-svg-icons";
 
 const MenuContainer = styled.div`
 flex: 0.5;
@@ -111,9 +111,9 @@ const SideBar = ({menuOpen, setMenuOpen, setDarkMode, darkMode}) => {
     
     const buttonItems =  [
        {
-            fun : () => console.log("Upload"),
-            name : "Upload",
-            icon : faUpload,
+            fun : () => console.log("Genres"),
+            name : "Genres",
+            icon : faMusic,
         },
     
         {

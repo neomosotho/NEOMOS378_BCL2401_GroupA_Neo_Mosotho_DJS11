@@ -43,6 +43,22 @@ const EpisodeContainer = styled.div`
   margin-left: 20px;
 `;
 
+const EpisodeCard = styled.div`
+  background: ${({ theme }) => theme.card};
+  color: ${({ theme }) => theme.text_primary};
+  border-radius: 600px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 50px;
+  margin-top: 50px;
+`;
+
+const EpisodeTitle = styled.p`
+  font-size: 16px;
+  margin-bottom: 8px;
+`;
+
+
 const PlayButton = styled.button`
   background: ${({ theme }) => theme.button};
   color: ${({ theme }) => theme.text_primary};
@@ -56,6 +72,12 @@ const PlayButton = styled.button`
   &:hover {
     background: ${({ theme }) => theme.bgLight};
   }
+`;
+
+const img = styled.img`
+width: 10px;
+height: 20px;
+
 `;
 
 const FavoritesButton = styled.button`
@@ -120,7 +142,6 @@ const Shows = () => {
     <ShowContainer>
       <h2>{data.title}</h2>
       <p>{data.description}</p>
-      
       <SeasonButton onClick={toggleSeasonsDropdown}>
         {showSeasons ? "Hide Seasons" : "Show Seasons"}
       </SeasonButton>
@@ -128,12 +149,14 @@ const Shows = () => {
         {data.seasons && data.seasons.length > 0 ? (
           data.seasons.map((season) => (
             <SeasonContainer key={season.number}>
+              <img src={season.image} alt={season.title} />
               <SeasonButton onClick={() => handleSeasonClick(season)}>
                 Season {season.season}
               </SeasonButton>
               {selectedSeason === season &&
                 season.episodes.map((episode) => (
-                  <EpisodeContainer key={episode.id}>
+
+                  <EpisodeCard key={episode.id}>
                     <p>{episode.title}</p>
                     <PlayButton onClick={() => handleEpisodeClick(episode)}>
                       Play
@@ -141,7 +164,7 @@ const Shows = () => {
                     <FavoritesButton onClick={() => handleFavoriteClick(episode)}>
                       <FontAwesomeIcon icon={favorites.some(fav => fav.id === episode.id) ? solidStar : regularStar} />
                     </FavoritesButton>
-                  </EpisodeContainer>
+                  </EpisodeCard>
                 ))}
             </SeasonContainer>
           ))

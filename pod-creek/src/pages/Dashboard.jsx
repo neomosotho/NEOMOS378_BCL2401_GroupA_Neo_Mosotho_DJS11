@@ -72,6 +72,23 @@ const EpisodeTitle = styled.p`
   cursor: pointer;
 `;
 
+const Genre = styled.p`
+  font-size: 14px;
+  color: ${({ theme }) => theme.text_secondary};
+`;
+
+const genreMapping = {
+  1: "Personal Growth",
+  2: "Investigative Journalism",
+  3: "History",
+  4: "Comedy",
+  5: "Entertainment",
+  6: "Business",
+  7: "Fiction",
+  8: "News",
+  9: "Kids and Family"
+};
+
 const Dashboard = () => {
   const { data, loading, error } = useFetchPodcasts("all");
   const [selectedShow, setSelectedShow] = useState(null);
@@ -128,6 +145,7 @@ const Dashboard = () => {
               <PodcastDetails>
                 <PodcastTitle>{podcast.title}</PodcastTitle>
                 <PodcastSeasons>{podcast.seasons.length} Seasons</PodcastSeasons>
+                {/* <PodcastGenre></PodcastGenre> */}
               </PodcastDetails>
             </NavLink>
 
