@@ -1,5 +1,6 @@
 /* eslint-disable react/jsx-no-undef */
 /* eslint-disable no-unused-vars */
+
 import React, { useState, useEffect } from "react";
 import useFetchPodcasts from "../utils/useFetchPodcasts";
 import styled from "styled-components";
@@ -10,6 +11,7 @@ import { faStar as regularStar } from "@fortawesome/free-regular-svg-icons";
 import NavBar from "../components/NavBar";
 import SortButtons from "../components/sortButtons";
 
+// Styled-components for various elements
 const DashboardContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
@@ -77,6 +79,7 @@ const Genre = styled.p`
   color: ${({ theme }) => theme.text_secondary};
 `;
 
+// Mapping genre IDs to genre names
 const genreMapping = {
   1: "Personal Growth",
   2: "Investigative Journalism",
@@ -89,6 +92,7 @@ const genreMapping = {
   9: "Kids and Family"
 };
 
+// Dashboard component to display list of podcasts
 const Dashboard = () => {
   const { data, loading, error } = useFetchPodcasts("all");
   const [selectedShow, setSelectedShow] = useState(null);
@@ -97,11 +101,12 @@ const Dashboard = () => {
   const [selectedSort, setSelectedSort] = useState("All"); // Default sort option
 
   useEffect(() => {
+    // Fetch favorite podcasts from localStorage on component mount
     const favs = JSON.parse(localStorage.getItem("favorites")) || [];
     setFavorites(favs);
   }, []);
 
-  // Sort function based on selected option
+  // Function to handle sorting of podcasts
   const handleSortChange = (sortOption) => {
     setSelectedSort(sortOption);
     let sortedShows = [...data];
@@ -126,6 +131,7 @@ const Dashboard = () => {
     setSortedData(sortedShows);
   };
 
+  // Function to handle click on a podcast show
   const handleShowClick = (showId) => {
     setSelectedShow(showId);
   };
@@ -133,19 +139,23 @@ const Dashboard = () => {
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
 
-  
   return (
     <>
+      {/* Sort buttons component */}
       <SortButtons onSort={handleSortChange} /> 
       <DashboardContainer>
         {(selectedSort !== "All" ? sortedData : data).map((podcast) => (
           <PodcastCard key={podcast.id} onClick={() => handleShowClick(podcast)}>
             <NavLink to={`/shows/${podcast.id}`} style={{ textDecoration: "none" }}>
+              {/* Podcast image */}
               <PodcastImage src={podcast.image} alt={podcast.title} />
               <PodcastDetails>
+                {/* Podcast title */}
                 <PodcastTitle>{podcast.title}</PodcastTitle>
+                {/* Number of seasons */}
                 <PodcastSeasons>{podcast.seasons.length} Seasons</PodcastSeasons>
-                {/* <PodcastGenre></PodcastGenre> */}
+                {/* Uncomment and use this if you want to show genre */}
+                {/* <PodcastGenre>{genreMapping[podcast.genreId]}</PodcastGenre> */}
               </PodcastDetails>
             </NavLink>
 
@@ -153,9 +163,11 @@ const Dashboard = () => {
               <SeasonContainer>
                 {podcast.seasons.map((season) => (
                   <div key={season.number}>
+                    {/* Season title */}
                     <SeasonTitle>{`Season ${season.season}`}</SeasonTitle>
                     {season.episodes.map((episode) => (
                       <EpisodeContainer key={episode.id}>
+                        {/* Episode title */}
                         <EpisodeTitle>{episode.title}</EpisodeTitle>
                       </EpisodeContainer>
                     ))}
@@ -171,5 +183,6 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
+
 
 
