@@ -11,8 +11,6 @@ const SortButtons = ({ onSort }) => {
 
   return (
     <div>
-      {/* Button to sort all items */}
-      <button onClick={() => handleSortChange("All")}>All</button>
       {/* Button to sort items alphabetically A-Z */}
       <button onClick={() => handleSortChange("A-Z")}>A-Z</button>
       {/* Button to sort items alphabetically Z-A */}

@@ -6,7 +6,7 @@ import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faUser } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
-import SortButtons from "../components/sortButtons"; // Import sortButtons component
+import SortButtons from "./SortButtons"; // Import sortButtons component
 
 const NavBarDiv = styled.div`
   display: flex;

@@ -9,7 +9,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar as solidStar } from "@fortawesome/free-solid-svg-icons";
 import { faStar as regularStar } from "@fortawesome/free-regular-svg-icons";
 import NavBar from "../components/NavBar";
-import SortButtons from "../components/sortButtons";
+import SortButtons from "../components/SortButtons";
+import { formatDistanceToNow } from 'date-fns';
 
 // Styled-components for various elements
 const DashboardContainer = styled.div`
@@ -153,9 +154,10 @@ const Dashboard = () => {
                 {/* Podcast title */}
                 <PodcastTitle>{podcast.title}</PodcastTitle>
                 {/* Number of seasons */}
-                <PodcastSeasons>{podcast.seasons.length} Seasons</PodcastSeasons>
+                <PodcastSeasons>{`${podcast.seasons.length} Seasons`}</PodcastSeasons>
                 {/* Uncomment and use this if you want to show genre */}
                 {/* <PodcastGenre>{genreMapping[podcast.genreId]}</PodcastGenre> */}
+                <PodcastUpdated>{`Last updated ${formatDistanceToNow(new Date(podcast.updated))} ago`}</PodcastUpdated>
               </PodcastDetails>
             </NavLink>
 

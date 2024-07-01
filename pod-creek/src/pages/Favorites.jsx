@@ -4,8 +4,10 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import AudioPlayer from "../components/AudioPlayer";
+import useFetchPodcasts from "../utils/useFetchPodcasts";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faStar as solidStar, faStar as regularStar } from "@fortawesome/free-solid-svg-icons";
+import { faStar as solidStar, faStar as regularStar, faV } from "@fortawesome/free-solid-svg-icons";
+import SortButtons from "../components/SortButtons";
 
 // Styled-components for styling the Favorites container and episode cards
 const FavoritesContainer = styled.div`
@@ -61,8 +63,6 @@ const PlayButton = styled.button`
 const Favorites = () => {
   // State to hold the list of favorite episodes
   const [favorites, setFavorites] = useState([]);
-  // State to hold the currently selected episode for playback
-  const [selectedEpisode, setSelectedEpisode] = useState(null);
 
   // useEffect to fetch favorites from localStorage on component mount
   useEffect(() => {
@@ -70,6 +70,7 @@ const Favorites = () => {
     const favs = JSON.parse(localStorage.getItem("favorites")) || [];
     // Update the favorites state with the retrieved data
     setFavorites(favs);
+    setSortedData(favs)
   }, []);
 
   // Handler to set the selected episode for playback
@@ -78,14 +79,53 @@ const Favorites = () => {
     setSelectedEpisode(episode);
   };
 
+  const [selectedSort, setSelectedSort] = useState("All");
+  const [sortedData, setSortedData] = useState([]);
+  const { data, loading, error } = useFetchPodcasts("all");
+  // State to hold the currently selected episode for playback
+  const [selectedEpisode, setSelectedEpisode] = useState(null);
+  const [sortedEpisodes, setSortedepisodes] = useState("All");
+
+    // Function to handle sorting of podcasts
+    const handleSortChange = (sortOption) => {
+      setSelectedSort(sortOption);
+      let sortedEpisodes = [...favorites];
+      switch (sortOption) {
+        case "A-Z":
+          sortedEpisodes.sort((a, b) => a.episode.title.localeCompare(b.episode.title));
+          break;
+        case "Z-A":
+          sortedEpisodes.sort((a, b) => b.episode.title.localeCompare(a.episode.title));
+          break;
+        case "Newest":
+          sortedEpisodes.sort((a, b) => new Date(b.date) - new Date(a.date));
+          break;
+        case "Oldest":
+          sortedEpisodes.sort((a, b) => new Date(a.date) - new Date(b.date));
+          break;
+        default:
+          // All or default case
+          sortedEpisodes = [...favorites];
+          break;
+      }
+      setSortedData(sortedEpisodes);
+    };
+
+    // console.log(data)
+    console.log(selectedEpisode)
+    console.log(favorites)
+    console.log(sortedData)
+
   return (
+    <>
+    <SortButtons onSort={handleSortChange} /> 
     <FavoritesContainer>
-      {favorites.length === 0 ? (
+      {sortedData.length === 0 ? (
         // Display a message if no favorite episodes are found
         <p>No favorite episodes found.</p>
       ) : (
         // Map through the list of favorite episodes and render each one
-        favorites.map((favorite) => (
+        sortedData.map((favorite) => (
           <EpisodeCard key={favorite.episode.id}>
             {/* <PodcastImage src={favorite.episode.image} alt={favorite.episode.title} /> */}
             <EpisodeDetails>
@@ -104,6 +144,7 @@ const Favorites = () => {
       {/* Render the AudioPlayer component if an episode is selected for playback */}
       {selectedEpisode && <AudioPlayer src={selectedEpisode.audio} />}
     </FavoritesContainer>
+    </>
   );
 };
 
