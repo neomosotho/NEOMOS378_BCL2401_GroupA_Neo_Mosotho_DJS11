@@ -9,11 +9,10 @@ import { NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar as solidStar } from "@fortawesome/free-solid-svg-icons";
 import { faStar as regularStar } from "@fortawesome/free-regular-svg-icons";
+import { faChevronLeft, faChevronRight } from "@fortawesome/free-solid-svg-icons";
 import NavBar from "../components/NavBar";
 import SortButtons from "../components/SortButtons";
 import Modal from "react-modal";
-import { faChevronLeft, faChevronRight } from "@fortawesome/free-solid-svg-icons";
-
 
 // Styled-components for various elements
 const DashboardContainer = styled.div`
@@ -27,6 +26,7 @@ const DashboardContainer = styled.div`
 const CarouselContainer = styled.div`
   display: flex;
   align-items: center;
+  margin-bottom: 20px;
 `;
 
 const CarouselWrapper = styled.div`
@@ -61,7 +61,7 @@ const PodcastCard = styled.div`
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   width: 300px;
   text-align: left;
-  cursor: pointer;
+  margin: 0 10px;
 `;
 
 const PodcastImage = styled.img`
@@ -90,33 +90,10 @@ const SeasonContainer = styled.div`
   padding: 16px;
 `;
 
-const SeasonTitle = styled.h4`
-  font-size: 16px;
-  margin: 12px 0;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-`;
-
-const EpisodeContainer = styled.div`
-  padding-left: 16px;
-`;
-
-const EpisodeTitle = styled.p`
-  font-size: 14px;
-  margin: 8px 0;
-  cursor: pointer;
-`;
-
 const SeasonDropdown = styled.select`
   margin-bottom: 10px;
   padding: 8px;
   font-size: 14px;
-`;
-
-const Genre = styled.p`
-  font-size: 14px;
-  color: ${({ theme }) => theme.text_secondary};
 `;
 
 const ModalContent = styled.div`
@@ -147,6 +124,44 @@ const ModalCloseButton = styled.button`
   }
 `;
 
+const Carousel = ({ data }) => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const handlePrevClick = () => {
+    setCurrentIndex((prevIndex) => Math.max(prevIndex - 4, 0));
+  };
+
+  const handleNextClick = () => {
+    setCurrentIndex((prevIndex) => Math.min(prevIndex + 4, data.length - 4));
+  };
+
+  return (
+    <CarouselContainer>
+      <ArrowButton onClick={handlePrevClick} disabled={currentIndex === 0}>
+        <FontAwesomeIcon icon={faChevronLeft} />
+      </ArrowButton>
+      <CarouselWrapper>
+        <CarouselContent style={{ transform: `translateX(-${currentIndex * 320}px)` }}>
+          {data.slice(currentIndex, currentIndex + 4).map((podcast) => (
+            <PodcastCard key={podcast.id}>
+              <NavLink to={`/shows/${podcast.id}`} style={{ textDecoration: "none" }}>
+                <PodcastImage src={podcast.image} alt={podcast.title} />
+                <PodcastDetails>
+                  <PodcastTitle>{podcast.title}</PodcastTitle>
+                  <PodcastSeasons>{`${podcast.seasons.length} Seasons`}</PodcastSeasons>
+                </PodcastDetails>
+              </NavLink>
+            </PodcastCard>
+          ))}
+        </CarouselContent>
+      </CarouselWrapper>
+      <ArrowButton onClick={handleNextClick} disabled={currentIndex >= data.length - 4}>
+        <FontAwesomeIcon icon={faChevronRight} />
+      </ArrowButton>
+    </CarouselContainer>
+  );
+};
+
 const Dashboard = () => {
   const { data, loading, error } = useFetchPodcasts("all");
   const [selectedShow, setSelectedShow] = useState(null);
@@ -156,7 +171,6 @@ const Dashboard = () => {
   const [selectedSort, setSelectedSort] = useState("All");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedEpisodes, setSelectedEpisodes] = useState([]);
-  const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
     const favs = JSON.parse(localStorage.getItem("favorites")) || [];
@@ -209,20 +223,13 @@ const Dashboard = () => {
     setIsModalOpen(false);
   };
 
-  const handlePrevClick = () => {
-    setCurrentIndex((prevIndex) => Math.max(prevIndex - 1, 0));
-  };
-
-  const handleNextClick = () => {
-    setCurrentIndex((prevIndex) => Math.min(prevIndex + 1, sortedData.length - 1));
-  };
-
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
 
   return (
     <>
       <SortButtons onSort={handleSortChange} />
+      <Carousel data={sortedData} />
       <DashboardContainer>
         {(selectedSort !== "All" ? sortedData : data).map((podcast) => (
           <PodcastCard key={podcast.id} onClick={() => handleShowClick(podcast.id)}>
@@ -253,26 +260,11 @@ const Dashboard = () => {
                     </option>
                   ))}
                 </SeasonDropdown>
-                
               </SeasonContainer>
             )}
           </PodcastCard>
         ))}
       </DashboardContainer>
+</>
 
-      <Modal isOpen={isModalOpen} onRequestClose={closeModal} contentLabel="Episodes Modal">
-        <ModalContent>
-          <ModalHeader>Episodes</ModalHeader>
-          <EpisodeContainer>
-            {selectedEpisodes.map((episode) => (
-              <EpisodeTitle key={episode.id}>{episode.title}</EpisodeTitle>
-            ))}
-          </EpisodeContainer>
-          <ModalCloseButton onClick={closeModal}>Close</ModalCloseButton>
-        </ModalContent>
-      </Modal>
-    </>
-  );
-};
-
-export default Dashboard;
+export default Carousel;

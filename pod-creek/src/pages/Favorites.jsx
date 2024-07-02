@@ -59,6 +59,22 @@ const PlayButton = styled.button`
   }
 `;
 
+const RemoveButton = styled.button`
+  background: ${({ theme }) => theme.error};
+  color: ${({ theme }) => theme.text_primary};
+  border: none;
+  border-radius: 4px;
+  padding: 5px 10px;
+  cursor: pointer;
+  margin-top: 10px;
+  font-size: 14px;
+  margin-left: 10px;
+
+  &:hover {
+    background: ${({ theme }) => theme.errorHover};
+  }
+`;
+
 // Main Favorites component
 const Favorites = () => {
   // State to hold the list of favorite episodes
@@ -77,6 +93,15 @@ const Favorites = () => {
   const handlePlayClick = (episode) => {
     // Update the selectedEpisode state with the clicked episode
     setSelectedEpisode(episode);
+  };
+
+  const handleRemoveClick = (episodeId) => {
+    // Filter out the episode that needs to be removed
+    const updatedFavorites = favorites.filter((favorite) => favorite.episode.id !== episodeId);
+    // Update the favorites state and localStorage
+    setFavorites(updatedFavorites);
+    setSortedData(updatedFavorites);
+    localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
   };
 
   const [selectedSort, setSelectedSort] = useState("All");
@@ -111,6 +136,19 @@ const Favorites = () => {
       setSortedData(sortedEpisodes);
     };
 
+    const groupedFavorites = favorites.reduce((acc, favorite) => {
+      const showId = favorite.episode.showId; // Assuming each episode has a showId
+      const seasonNumber = favorite.episode.season; // Assuming each episode has a season number
+      if (!acc[showId]) {
+        acc[showId] = {};
+      }
+      if (!acc[showId][seasonNumber]) {
+        acc[showId][seasonNumber] = [];
+      }
+      acc[showId][seasonNumber].push(favorite);
+      return acc;
+    }, {});
+
     // console.log(data)
     console.log(selectedEpisode)
     console.log(favorites)
@@ -137,6 +175,11 @@ const Favorites = () => {
               <PlayButton onClick={() => handlePlayClick(favorite.episode)}>
                 Play
               </PlayButton>
+              {/* Button to delete the selected episode */}
+              <RemoveButton onClick={() => handleRemoveClick(favorite.episode)}>
+                Remove
+              </RemoveButton>
+
             </EpisodeDetails>
           </EpisodeCard>
         ))

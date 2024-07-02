@@ -60,7 +60,7 @@ function App() {
               <main> {/* Main content area */}
                 <Routes> {/* Define routes for the app */}
                   <Route exact path="/" element={<Dashboard />} /> {/* Route for Dashboard */}
-                  <Route path="/genre/:id" element={<Genre />} /> {/* Route for Genre with dynamic ID */}
+                  <Route path="/genres/:id" element={<Genre />} /> {/* Route for Genre with dynamic ID */}
                   <Route path="/shows/:id" element={<Shows />} /> {/* Route for Shows with dynamic ID */}
                   <Route path="/search" element={<Search />} /> {/* Route for Search */}
                   <Route path="/favorites" element={<Favorites />} /> {/* Route for Favorites */}
