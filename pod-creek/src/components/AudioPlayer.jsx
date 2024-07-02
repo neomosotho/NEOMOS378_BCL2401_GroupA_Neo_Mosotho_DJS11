@@ -9,7 +9,12 @@ const Player = styled.audio`
   margin-top: 20px;
 `;
 
-function AudioPlayer ( { play, img }) {
+// const image = styled.img`
+// height: 10px;
+// width: 20px;
+// `;
+
+function AudioPlayer ( { play }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -22,9 +27,6 @@ function AudioPlayer ( { play, img }) {
 
   return (
     <div>
-      <div>
-        <img src={img} />
-      </div>
       <div>
         <audio controls src={play.file} />
       </div>

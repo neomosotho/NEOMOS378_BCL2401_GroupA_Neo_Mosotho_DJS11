@@ -124,6 +124,11 @@ const ModalCloseButton = styled.button`
   }
 `;
 
+const playEpisode =styled.button`
+height:10px;
+width: 20px;
+`;
+
 const Shows = () => {
   const { id } = useParams();
   const { data, loading, error } = useFetchPodcasts("show", id);
@@ -233,7 +238,7 @@ const Shows = () => {
               </FavoritesButton>
             </EpisodeCard>
           ))}
-          {playEpisode && <AudioPlayer play={playEpisode}  img={selectedSeason.image} />}
+          {playEpisode && <AudioPlayer play={playEpisode} />}
           <ModalCloseButton onClick={closeModal}>Close</ModalCloseButton>
         </ModalContent>
         
